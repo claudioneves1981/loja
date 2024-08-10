@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @SequenceGenerator(name = "seq_carrinho" , sequenceName = "seq_carrinho", allocationSize = 1)
 public class Carrinho {
 

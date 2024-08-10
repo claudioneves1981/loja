@@ -1,5 +1,6 @@
 package com.example.loja.controller;
 
+import com.example.loja.dto.CarrinhoDTO;
 import com.example.loja.model.Carrinho;
 import com.example.loja.service.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +16,19 @@ public class CarrinhoController {
 
     @ResponseBody
     @PostMapping(value = "carrinho/adicionar")
-    public void adicionar(@RequestBody Carrinho carrinho){
+    public void adicionar(@RequestBody CarrinhoDTO carrinho){
         carrinhoService.adicionar(carrinho);
     }
 
     @ResponseBody
-    @PutMapping(value = "carrinho/{id}/atualizar")
-    public void atualizar(@RequestBody Carrinho carrinho, @PathVariable("id") Long id){
-        carrinhoService.atualizar(carrinho, id);
+    @DeleteMapping(value = "carrinho/{idcarrinho}/remover/{idproduto}")
+    public void remover(@PathVariable("idcarrinho") Long idCarrinho, @PathVariable("idproduto") Long idProduto) throws Exception {
+        carrinhoService.remover(idCarrinho, idProduto);
     }
 
     @ResponseBody
     @GetMapping(value = "carrinho/{id}")
-    public ResponseEntity<Carrinho> carrinhoPorId(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<CarrinhoDTO> carrinhoPorId(@PathVariable("id") Long id) throws Exception {
         return new ResponseEntity<>(carrinhoService.carrinhoPorId(id), HttpStatus.OK);
     }
 }
